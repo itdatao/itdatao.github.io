@@ -115,4 +115,33 @@ field: post
 format: html
 limit: 10000
 
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  log: false
+  model:
+    use: live2d-widget-model-hijiki
+  display:
+    position: right
+    width: 150
+    height: 300
+  mobile:
+    show: true
 
+gitment:   
+  enable: true
+  mint: true  
+  count: true 
+  lazy: false  						#评论懒加载，如果true，则默认不展示评论，点击按钮查看评论
+  cleanly: false  	
+  language: zh-CN
+  github_user: https://github.com/itdatao					#github名称
+  github_repo: blog-comments.git			#上一步新建存放评论的仓库名
+  client_id: 68ae00996366cbfe27b7			#上面注册 OAuth Application 的 Client ID
+  client_secret: 0a2d65cea9a9024872be4217ddf0af3d4d017ba0		#上面注册 OAuth Application 申请的 Client Secret
+  proxy_gateway: 
+  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint
