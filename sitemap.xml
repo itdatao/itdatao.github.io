@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://itdatao.github.io/tags/index.html</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/posts/c24675b4/</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/posts/4a17b156/</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/posts/21283aa4/</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  <url>
+    <loc>http://itdatao.github.io/</loc>
+    <lastmod>2023-02-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>http://itdatao.github.io/tags/MySQL/</loc>
+    <lastmod>2023-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/tags/Java/</loc>
+    <lastmod>2023-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
+  
+</urlset>

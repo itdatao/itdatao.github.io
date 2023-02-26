@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MySQL</title>
+    <url>/posts/c24675b4/</url>
+    <content><![CDATA[<h2 id="MySQL45讲"><a href="#MySQL45讲" class="headerlink" title="MySQL45讲"></a>MySQL45讲</h2><p>什么是MySQL</p>
+<span id="more"></span>
+
+<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><h4 id="2-1-一条SQL是如何执行的"><a href="#2-1-一条SQL是如何执行的" class="headerlink" title="2.1 一条SQL是如何执行的"></a>2.1 一条SQL是如何执行的</h4><h4 id="2-2-索引的数据结构"><a href="#2-2-索引的数据结构" class="headerlink" title="2.2 索引的数据结构"></a>2.2 索引的数据结构</h4><h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><p>xxx，都行的点点滴滴多</p>
+]]></content>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
-    <url>/posts/undefined/</url>
+    <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -17,5 +31,447 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>effective Java</title>
+    <url>/posts/21283aa4/</url>
+    <content><![CDATA[<h1 id="第一章-创建和销毁对象"><a href="#第一章-创建和销毁对象" class="headerlink" title="第一章 创建和销毁对象"></a>第一章 创建和销毁对象</h1><h2 id="1-考虑用静态代替构造方法"><a href="#1-考虑用静态代替构造方法" class="headerlink" title="1. 考虑用静态代替构造方法"></a>1. 考虑用静态代替构造方法</h2><p>想要获取一个类的实例，一种传统的方式是通过共有的构造器，当然还可以使用另一种技术：提供共有的静态工厂方法。</p>
+<span id="more"></span>
+
+<p>什么是静态工厂？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title function_">valueOf</span><span class="params">(<span class="type">boolean</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (b ? TRUE : FALSE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么要用静态工厂替换构造方法？有什么优点</p>
+<ol>
+<li>静态工厂相比构造器来讲，有名字并且通俗易懂，构造器的名字必须和类名一致</li>
+<li>静态工厂每次调用不必新建对象。所以适用于不可变的类，单例，初始化就缓存好，避免重复创建。</li>
+<li>静态工厂方法能够返回原先返回类型的任意子类型的对象，更加灵活的选择返回对象。例如Collection有32个实现类在Collections中可以返回。</li>
+<li>静态工厂可以根据调用传入的不同参数返回不同的对象。</li>
+</ol>
+<p>静态工厂的不足之处？</p>
+<ol>
+<li>静态工厂没有public和protected的方法，因此不能被子类化。</li>
+</ol>
+<p>一般静态工厂方法名字的含义</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">fromValue(value) <span class="comment">//这种通过传入单个参数返回相应类型的实例对象</span></span><br><span class="line">of(v1,v2,v3) <span class="comment">// 传入多个参数，返回报站这些参数的实例。</span></span><br><span class="line"><span class="comment">// valueOf是from of更详细的替代方案</span></span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">prime</span> <span class="operator">=</span> BigInteger.valueOf(Integer.MAX_VALUE);</span><br><span class="line"><span class="type">Object</span> <span class="variable">newArray</span> <span class="operator">=</span> Array.newInstance(classObject, arrayLen);<span class="comment">//每次返回的对象都是新的实例</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-当遇到多个构造器使用构建者"><a href="#2-当遇到多个构造器使用构建者" class="headerlink" title="2. 当遇到多个构造器使用构建者"></a>2. 当遇到多个构造器使用构建者</h2><p>构造方法和静态工厂共有的限制：不能很好的扩展很多可选参数的场景 。因此对于多个可选参数，考虑使用构建者模式。</p>
+<p>其实对于等多个可选参数可以使用新建JavaBean 使用set方法创建实例，这样更通俗易懂但是会很冗长。</p>
+<p>builder结合了构造方法的安全性和JavaBean 模式的可读性。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Builder Pattern</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NutritionFacts</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> servingSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> servings;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> calories;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> fat;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> sodium;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> carbohydrate;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">        <span class="comment">// Required parameters</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> servingSize;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> servings;</span><br><span class="line">        <span class="comment">// Optional parameters - initialized to default values</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> <span class="variable">calories</span>      <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> <span class="variable">fat</span>           <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Builder</span><span class="params">(<span class="type">int</span> servingSize, <span class="type">int</span> servings)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.servingSize = servingSize;</span><br><span class="line">            <span class="built_in">this</span>.servings    = servings;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">calories</span><span class="params">(<span class="type">int</span> val)</span> &#123; </span><br><span class="line">            calories = val;      </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">fat</span><span class="params">(<span class="type">int</span> val)</span> &#123; </span><br><span class="line">           fat = val;           </span><br><span class="line">           <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">public</span> NutritionFacts <span class="title function_">build</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">NutritionFacts</span>(<span class="built_in">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">NutritionFacts</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">        servingSize  = builder.servingSize;</span><br><span class="line">        servings     = builder.servings;</span><br><span class="line">        calories     = builder.calories;</span><br><span class="line">        fat          = builder.fat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了确保多个参数的不变性不受攻击，可以在builder复制参数后对对象属性进行检查。检查失败抛出非法参数异常（IllegalArgumentException）。</p>
+<p>单个builder可以重复使用构建多个不同的对象，对象的参数可以灵活调整，适用多个可选参数。</p>
+<p>协变返回类型：一个子类的方法被声明为返回在父类中声明的返回类型的子类型，称为协变返回类型（covariant return typing）。 它允许客户端使用这些 builder，而不需要强制转换。（这个比较有意思）</p>
+<h2 id="3-使用私有构造器或者枚举实现单例"><a href="#3-使用私有构造器或者枚举实现单例" class="headerlink" title="3. 使用私有构造器或者枚举实现单例"></a>3. 使用私有构造器或者枚举实现单例</h2><p>单例对象通常表示无状态，不可变对象。</p>
+<p>实现单例的几种方式，其中枚举方式最佳，无偿提供了序列化机制，防止多个实例化。可以阻止反射创建实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 单例模式的实现方式一 Singleton with public final field</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Elvis</span> &#123;</span><br><span class="line">    <span class="comment">// 公共静态成员变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Elvis</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Elvis</span>();</span><br><span class="line">    <span class="comment">// 私有化构造函数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Elvis</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">leaveTheBuilding</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单例模式的实现方式二 Singleton with static factory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Elvis</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Elvis</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Elvis</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Elvis</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="comment">// 每次调用该方法否返回同一个对象引用</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Elvis <span class="title function_">getInstance</span><span class="params">()</span> &#123; <span class="keyword">return</span> INSTANCE; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">leaveTheBuilding</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单例模式的实现方式三 Enum singleton - the preferred approach（最佳方式）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Elvis</span> &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">leaveTheBuilding</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// readResolve method to preserve singleton property</span></span><br><span class="line"><span class="keyword">private</span> Object <span class="title function_">readResolve</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="comment">// Return the one true Elvis and let the garbage collector</span></span><br><span class="line">     <span class="comment">// take care of the Elvis impersonator.</span></span><br><span class="line">    <span class="keyword">return</span> INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在实例化过程中为了保证单例不被破坏，生命所有的字段为transient，并提供readResolve方法。否则当序列化实例被反序列化时，就会创建一个新的实例。</p>
+<h2 id="4-使用私有构造器实现非实例化"><a href="#4-使用私有构造器实现非实例化" class="headerlink" title="4. 使用私有构造器实现非实例化"></a>4. 使用私有构造器实现非实例化</h2><p>试图通过创建抽象类来实现非实例化是行不通的，因为该类的子类可以被实例化，并且他还可能会误导用户该类是为了继承而设计的。因此使用简单的方式——私有化构造函数实现类的非实例化。</p>
+<h2 id="5-依赖注入优于硬链接资源"><a href="#5-依赖注入优于硬链接资源" class="headerlink" title="5. 依赖注入优于硬链接资源"></a>5. 依赖注入优于硬链接资源</h2><p>当多个类依赖于同一个或者多个底层资源时，静态工具和单例模式对于这种场景是不适用的。因为这两种方式再并发场景中变得不可用，更容易出错。</p>
+<p>其实每个实例在使用客户端的资源时，可以在创建时将资源的参数传入构造函数中，这就是依赖注入的一种形式（构造方法注入）。这种方式保证了资源的不可变性，依赖注入不仅适用于构造器，也同样适用于静态工厂和Builder。Supplier<T>这个接口就可以很好的标识这些工厂，客户端传入一个工厂，工厂负责创建指定类型的实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例如生成马赛克的工厂</span></span><br><span class="line">Mosaic <span class="title function_">create</span><span class="params">(Supplier&lt;? extends Tile&gt; tileFactory)</span> &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>依赖注入可以大幅度提升类的灵活性，可测试性，复用性。</p>
+<h2 id="6-避免创建不必要的对象"><a href="#6-避免创建不必要的对象" class="headerlink" title="6. 避免创建不必要的对象"></a>6. 避免创建不必要的对象</h2><p>如果一个对象是不可变的，那么他总能被复用，复用相比于新建更快速。</p>
+<p>当不可变类同时提供了构造器和静态工厂方法时，优先使用静态方法来避免创建不必要对象。</p>
+<p>自动装箱可能会创建不必要的对象，他模糊了基本类型和装箱类型之间的区别，但是没有消除这种区别，有可能会导致一些性能问题，因此优先使用基本类型而不是装箱类型。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">sum</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Long</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0L</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">long</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= Integer.MAX_VALUE; i++)</span><br><span class="line">        <span class="comment">// Long =&gt; long</span></span><br><span class="line">        sum += i;</span><br><span class="line">    <span class="keyword">return</span> sum; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意相比于创建新对象，复用的代价更高，如果没能暴增拷贝安全，将会导致潜在的bug和安全漏洞。</p>
+<h2 id="7-消除过时的对象引用"><a href="#7-消除过时的对象引用" class="headerlink" title="7. 消除过时的对象引用"></a>7. 消除过时的对象引用</h2><p>内存泄漏：指程序再申请内存后，无法释放已申请的内存空间，内存泄漏堆积后就会发生内存溢出。</p>
+<p>内存溢出：报错OOM，没有足够的内存供申请者使用。</p>
+<p>一般来讲当一个类自己管理自己的内存时，程序员就要注意内存内存泄露问题了，只要一个元素被释放了，那这个元素包含的所有对象应用都应该被清空。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">EmptyStackException</span>();</span><br><span class="line">    <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> elements[--size];</span><br><span class="line">    elements[size] = <span class="literal">null</span>; <span class="comment">// Eliminate obsolete reference help gc</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消除过期引用的最佳方式是将每个变量定义在最小的作用域中。</p>
+<p>缓存是内存泄漏的另一个来源。当将一个对象放到缓存中取，时间长了很容易忘记他还在那，剞劂方法可以使用WeakHashMap来充当缓存，只要key过期后就会被自动清除。</p>
+<h2 id="8-避免使用终结方法和清理方法"><a href="#8-避免使用终结方法和清理方法" class="headerlink" title="8. 避免使用终结方法和清理方法"></a>8. 避免使用终结方法和清理方法</h2><p>在Java9中，finalizers方法已经过时了，替代的是清理方法，清理方法比终结方法危险性更低，但仍然是不可预测的，性能比较低，并且也是非必要不使用。</p>
+<p>不使用的原因：</p>
+<ul>
+<li>终结方法和清理方法的缺点在于不能保证被及时执行或会被执行，当一个对象变得不可达，到执行终结方法或清理方法时，这个时间段是任意长的。因此当有对时间要求的任务不应该调用终结或清理方法完成，不应该依赖终结方法或者清理方法来更新重要的持久态。</li>
+<li>终结方法的另一个问题是在终结过程中会忽略掉抛出的异常，并且不会打印线程终止的堆栈信息。如果另一个线程企图使用这种未捕获异常的对象可能会发生不确定的行为。</li>
+<li>终结方法和清理方法会严重影响性能。</li>
+</ul>
+<p>清理方法和终结方法的两种用途：</p>
+<ol>
+<li>当对象的持有者忘记调用终止方法的情况下充当安全网。如 FileInputStream、FileOutputStream、ThreadPoolExecutor、和 java.sql.Connection具有充当安全网终结方法。</li>
+<li>本地对灯体是普通对象通过本机方法委托的非Java对象，因为本地对等体不是普通Java对象，因此垃圾收集器不会识别它，当性能可接受且本地对等体没有关键的资源，则可以用清理或者终结方法回收。</li>
+</ol>
+<h2 id="9-使用try-with-resources代替try-finally"><a href="#9-使用try-with-resources代替try-finally" class="headerlink" title="9. 使用try-with-resources代替try-finally"></a>9. 使用try-with-resources代替try-finally</h2><p>Java中有许多必须通过调用close方法手动关闭的资源，比如InputStream,OutputStream.</p>
+<p>在之前，即使是程序抛出异常或者返回的情况下，try-finally是保证资源正确关闭的最佳方式。但是当处理多个资源关闭时，情况就会变糟。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// try-finally is ugly when used with more than one resource!</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">copy</span><span class="params">(String src, String dst)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(src);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(dst);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[BUFFER_SIZE];</span><br><span class="line">            <span class="type">int</span> n;</span><br><span class="line">            <span class="keyword">while</span> ((n = in.read(buf)) &gt;= <span class="number">0</span>)</span><br><span class="line">                out.write(buf, <span class="number">0</span>, n);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try-with-resources on multiple resources - short and sweet</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">copy</span><span class="params">(String src, String dst)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">InputStream</span>   <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(src);</span><br><span class="line">         <span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(dst)) &#123;</span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[BUFFER_SIZE];</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        <span class="keyword">while</span> ((n = in.read(buf)) &gt;= <span class="number">0</span>)</span><br><span class="line">            out.write(buf, <span class="number">0</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，当最里层的finally的close方法关闭失败，外层的的异常就会覆盖掉里层的异常，导致调试过程会很困难。但使用try-with-resourses就可以避免这个问题，并且try-with-resourses代码更加简洁易读。</p>
+<h1 id="第二章-所有对象都通用的方法"><a href="#第二章-所有对象都通用的方法" class="headerlink" title="第二章 所有对象都通用的方法"></a>第二章 所有对象都通用的方法</h1><h2 id="10-覆盖equals方法时请遵守通用约定"><a href="#10-覆盖equals方法时请遵守通用约定" class="headerlink" title="10. 覆盖equals方法时请遵守通用约定"></a>10. 覆盖equals方法时请遵守通用约定</h2><p>因为Object主要是为继承设计的，它的所有非final方法都有清晰地约定，任何类要重写这些方法时，都有义务去遵守这些约定否则其他依赖这些约定的类就不会正常工作。</p>
+<p>什么时候不需要覆盖equals方法？</p>
+<ul>
+<li>每个类的实例都是固有唯一的。如Thread</li>
+<li>类不需要提供逻辑相等的功能。</li>
+<li>父类已经重写过equals方法，父类的行为完全适合子类。</li>
+<li>类是私有的，并且equals方法永远不会被调用。</li>
+</ul>
+<p>什么时候需要重写equals方法？</p>
+<p>如果一个类需要一个逻辑相等的概念，并且父类没有重写过这个方法，需要在该类中重写equals方法。通常这种类是值类。如Integer，String。</p>
+<p>重写equals方法必须遵守的约定。</p>
+<ol>
+<li>自反性：对任何费控引用x,x.equals(x)必须返回true。</li>
+<li>对称性：对于任何非空引用x和y，如果y.equals(x)=true，则x.equals(y)=true</li>
+<li>传递性: x,y,z都不为null，如果x.equals(y)=true，y.equals(z)=true，则z.equals(x)=true。</li>
+<li>一致性：如果x,y非空，并且equals比较中的信息没有修改，多次调用x.equals(y)都要始终返回true或false。</li>
+<li>对任何非空引用x,x.equals(null)必须返回false。</li>
+</ol>
+<p>重写equals方法时，要重写hashCode方法，不要让equals方法干太多事，不要将Object参数类型替换成其他类型。</p>
+<h2 id="11-重写equals方法时总要重写hashCode"><a href="#11-重写equals方法时总要重写hashCode" class="headerlink" title="11. 重写equals方法时总要重写hashCode"></a>11. 重写equals方法时总要重写hashCode</h2><p>重写equals方法必须重写hashCode方法，如果没有重写，在使用HasMap或HashSet时无法正常运作。</p>
+<p>重写的equals方法必须遵守 Object 中指定的规定。</p>
+<ul>
+<li>在应用程序的执行期间，只要对象的 equals 方法的比较操作所用到的信息没有被修改，那么对这同一个对象调用多次，hashCode 方法都必须始终如一地返回相同的值。</li>
+<li>如果两个对象调用 equals（Object）方法比较是相等的，那么调用这两个对象中任意一个对象的 hashCode 方法都必须产生相同的整数结果。</li>
+<li>如果两个对象根据 equals（Object）方法比较是不相等的，那么调用这两个对象中任意一个对象的 hashCode 方法，则不一定要产生不同的结果。无论如何，开发者应该知道，不相等的对象产生截然不同的结果，有可能提高散列表（hash tables）的性能。</li>
+</ul>
+<h2 id="12-始终覆盖toString"><a href="#12-始终覆盖toString" class="headerlink" title="12. 始终覆盖toString"></a>12. 始终覆盖toString</h2><p>默认的Object的toString方法返回的是：类名+@+无符号16进制散列码。</p>
+<p>toString 方法应该返回对象中包含的所有值得关注的信息。</p>
+<p>在实现toString时，需要判断是否处理返回值的格式。</p>
+<ul>
+<li>指定字符串的格式的好处：更易读。</li>
+<li>指定字符串的格式的坏处：一旦被广泛使用，必须始终坚持这种格式。如果改变格式，将会破坏代码和数据。</li>
+</ul>
+<p>无论是否指定格式，<strong>都为 toString 返回值中包含的所有信息，提供一种编程式的访问路径。否则不得不自己去解析，解析过程可能会出错。</strong></p>
+<h2 id="13-谨慎覆盖clone"><a href="#13-谨慎覆盖clone" class="headerlink" title="13. 谨慎覆盖clone"></a>13. 谨慎覆盖clone</h2><p>假设我们需要为一个类实现Cloneable接口，这个类的父类提供了一个良好的clone方法。我们从super.clone中得到的对象将会是原始对象的一个完整克隆。类中声明的任一属性的值将会和原始类对应的属性的值相等。如果每个属性包含了基本类型值或者不过变对象的引用，那么返回的对象可能正是我们要的，在这种情况下，不需要进一步的处理。</p>
+<p>如果一个类它的所有父类获取clone的对象是通过调用super.clone，那么<em>x.clone().getClass() == x.getClass()。</em></p>
+<p>对于不可变的类不应该提供clone方法，因为这会造成无意义的拷贝。对于final修饰的属性，克隆不会成功因为禁止向final修饰的属性二次赋值。</p>
+<p><strong>实际上，clone方法就是另一个构造器，我们必须保证它不会破坏原始对象而且能恰当创建被克隆对象的约束条件。</strong></p>
+<h2 id="14-考虑是否实现comparable"><a href="#14-考虑是否实现comparable" class="headerlink" title="14. 考虑是否实现comparable"></a>14. 考虑是否实现comparable</h2><p>compareTo方法并没有在Object里被声明，而是在Comparable接口中声明的唯一方法。</p>
+<p>假如一个类实现了Comparable接口，那就表明了这个类的各个实例之间是有顺序的。几乎所有的Java类库，包括枚举类型（条目34），都实现了Comparable接口。</p>
+<p>在下面的表述中，符号sgn（expression）表示数学中的signum函数，返回值为-1，0，1。</p>
+<ul>
+<li>实现类必须确保对于所有的x和y，sgn(x.compareTo(y)) == -sgn(y. compareTo(x))成立。（这意味着，当且仅当y.compareTo(x)抛出了异常，x.compareTo(y)也必须抛出异常。）（自反性）</li>
+<li>实现类必须确保关系的传递性：若(x. compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0)，则x.compareTo(z)&gt;0。</li>
+<li>最后，实现类必须确保若x.compareTo(y) == 0，则对于所有的z，sgn(x.compareTo(z)) == sgn(y.compareTo(z))成立。（一致性）</li>
+<li>强烈建议(x.compareTo(y) == 0) == (x.equals(y))成立，但这并不是必须的，通常来说，任何实现了Comparable接口的类如果违反了这个条件，那么应该做个说明。推荐的说法是“注意：该类具有自然排序，但是与equals方法不一致。”</li>
+</ul>
+<p>当遇到不同类型的实例比较时，会抛出ClassCastException异常。</p>
+<p>在compareTo方法里，我们对属性进行比较是为了得到一个顺序而不是看其是否相等。为了比较对象引用的属性，我们可以递归地调用compareTo方法。如果一个属性没有实现Comparable接口或者我们需要一个非标准的顺序，可以使用Comparator来替代。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Comparator&lt;PhoneNumber&gt; COMPARATOR = comparingInt((PhoneNumber pn) -&gt; pn.areaCode)</span><br><span class="line">.thenComparingInt(pn -&gt; pn.prefix)  </span><br><span class="line">.thenComparingInt(pn -&gt; pn.lineNum);</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(PhoneNumber pn)</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> COMPARATOR.compare(<span class="built_in">this</span>, pn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>compareTo或compare方法依赖于两个值之间的差值，若第一个值小于第二个值，则为负，若两个值相等，则为0，若第一个值大于第二个值，则为正。在实现compareTo方法时，避免使用 &lt; 和 &gt; 运算符来进行属性值的比较。相反，我们应该使用封箱基本类型的静态比较方法（例如Integer.compare），或者Comparator接口里的比较器构造方法（例如Comparator<Object> hashCodeOrder = Comparator.comparingInt(o -&gt; o.hashCode());）。</p>
+<h1 id="第三章-类和接口"><a href="#第三章-类和接口" class="headerlink" title="第三章 类和接口"></a>第三章 类和接口</h1><h2 id="15-最小化类和成员的访问性"><a href="#15-最小化类和成员的访问性" class="headerlink" title="15. 最小化类和成员的访问性"></a>15. 最小化类和成员的访问性</h2><p>封装：尽量让每个类或者成员尽可能的不可访问。</p>
+<p>如果一个顶层的类或者接口的访问修饰符是private，那么后续你可以修改，替换甚至删除他，而不必担心损害现有的方法，如果是public就需要永远支持，保证兼容性。</p>
+<p>如果想要测试代码，需要访问一个类的方法，将private-&gt;default是可接受的，但是提高到更高的访问级别是不可接受的。</p>
+<ul>
+<li>public类中的成员变量尽量不应该也是public。</li>
+<li>对于公有静态常量命名通常是大写字母组成，单词之间通过下划线分开。</li>
+<li>让一个类具有共有静态数组，或者返回这种数组的方法是不可取的，因为客户端调用时可以随意修改数组的内容是一个安全漏洞。（确保被公有静态final域引用的对象是不可变的）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] VALUES = &#123; ... &#125;;</span><br><span class="line"><span class="comment">// 可以改为如下,public -&gt; private 同时添加公有不可变的数组</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Thing[] VALUES = &#123; ... &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Thing&gt; VALUES = Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES)) ;</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-在公有类中使用访问方法而不是公有域"><a href="#16-在公有类中使用访问方法而不是公有域" class="headerlink" title="16. 在公有类中使用访问方法而不是公有域"></a>16. 在公有类中使用访问方法而不是公有域</h2><ul>
+<li>公有类应该永远都不要暴露可变域。因为在暴漏之后如果想要更改数据域的字段时就会牵一发而动全身。（客户端代码已经在各处使用了）</li>
+<li>对于公有类暴露不可变域的情况，虽然危害小一些，但也仍是有问题的。</li>
+<li>如果一个类在包外可以被访问，就应该提供访问方法</li>
+</ul>
+<h2 id="17-可变性最小化"><a href="#17-可变性最小化" class="headerlink" title="17. 可变性最小化"></a>17. 可变性最小化</h2><p>不可变类的好处：更安全，不容易出错，容易使用。（如String,BigDecimal等）</p>
+<ol>
+<li>不可变对象天然是线程安全的，不要求同步，不可变对象可以被自由共享，通常也是被static修饰的。</li>
+<li>不可变对象为其他对象提供了大量的构件，可以作为map的key,集合的元素，不会破坏考核或者map这种不变性.</li>
+<li>不可变对象提供了免费的失败原子机制。状态不会出现临时的不一致性。</li>
+</ol>
+<p>实现不可变类遵循的几个规则：</p>
+<ol>
+<li>不提供修改对象状态的方法。如setter</li>
+<li>确保这个类不能被继承。用final修饰，阻止子类改变对象的状态，从而破坏不可变性。</li>
+<li>所有数据域设置为private final，一个实例在线程之间传递确保正确，并防止对象被修改。</li>
+<li>确保对任务可变组件的互斥访问。</li>
+</ol>
+<p>缺点是：对于大对象来讲，每个不同的值都需要一个对应的对象。创建对象的成本会很高。</p>
+<p>解决方法：</p>
+<ol>
+<li>对于创建中重复的步骤，可以用基本数值类型来代替，这样不用每个步骤创建一个对象。</li>
+<li>创建一个公有的伙伴类，类似于String和StringBuilder的关系。</li>
+</ol>
+<p>注意：如果不可变类实现了序列化接口，同时不可变类还包含了对个指向可变对象的引用，这时候需要显示提供一个readObject方法和readResolve方法，不然攻击者可以通过反序列化方式创建该类的可变实例。</p>
+<p>不要每写一个getter就要冲动着去写一个对应的setter。<strong>类应该都是不可变的，除非有个很好的理由需要它们是可变的，如果一个类不能做成不可变，那就尽可能限制它的可变性。这样可以减少出现的错误。</strong></p>
+<p><strong>构造器应该完全初始化对象，并建立好不变性。</strong>除非有很强的理由，否则不要在构造器或静态方法之外还提供公有初始化方法。</p>
+<h2 id="18-组合优于继承"><a href="#18-组合优于继承" class="headerlink" title="18. 组合优于继承"></a>18. 组合优于继承</h2><p>继承是复用代码的方式，但同时也违反了封装原则。子类需要依赖父类的实现来实现自己的功能。如果父类产生变化，子类将会被破坏，需要跟着父类一起演化。</p>
+<p>继承只适用于一个类的类型的确是某个父类的子类型的情况。换句话说，只有当类B和类A是“is-a”的关系时，类B才应该扩展类A。是否每个B都确实是一个A？如果你对这个问题无法肯定地回答yes，那么B就不应该扩展A。</p>
+<p>如果子类在一个与父类不同的包中且父类本来就不是设计来被继承的，那么继承将会导致子类的脆弱性。为了避免这种脆弱性，我们应该使用组合与转发，而不是继承，尤其是存在一个适当的接口来实现一个现存的包装者类。包装者类不仅比子类更健壮，而且更强大。</p>
+<h2 id="19-要么涉及继承提供文档，要么禁止继承"><a href="#19-要么涉及继承提供文档，要么禁止继承" class="headerlink" title="19. 要么涉及继承提供文档，要么禁止继承"></a>19. 要么涉及继承提供文档，要么禁止继承</h2><p>一个类的文档必须说明在哪些情况下它会调用可子类的覆盖方法。例如，调用可能来自后台线程或者静态初始器。</p>
+<p>文档明确说明覆盖迭代方法将会产生的影响，描述方法是怎么做的。这便是继承复杂的一点。</p>
+<p>测一个被继承类的唯一方式是编写子类，如果忽略某个保护成员，就会出现问题，在子类中暴漏出来。</p>
+<p>如果一个了类允许被继承，必须有约束条件需要遵循。</p>
+<ol>
+<li>构造函数中一定不要调用可覆盖的方法。否则会导致程序失败。</li>
+<li>如果决定让设计被继承的类实现Serializable接口，而且这个类拥有readResolve方法或writeReplace方法，你一定要把readResolve方法或writeReplace方法设为受保护的，而不是私有的。</li>
+</ol>
+<p>如果某个类的确是要被子类化，否则最好将类声明为final或者保证其没有可访问的构造器来禁止该类被继承。</p>
+<h2 id="20-接口优于抽象类"><a href="#20-接口优于抽象类" class="headerlink" title="20. 接口优于抽象类"></a>20. 接口优于抽象类</h2><p>有两种方式可以定义一个多实现的接口：接口和抽象类；</p>
+<p>因为Java只允许单继承，所以约束了抽象类作为类型定义的使用，但是接口可以被任意一个类所实现，不管类处于那个位置。</p>
+<p>现有类可以很容易实现一个新接口，但是想要扩展一个相同的抽象类只能通过继承的方式，但是这种方式会带来较大的负面影响，强迫所有后代类都继承这个父类无论合不合适。</p>
+<p>使用包装类可以安全的增强接口的功能，如果使用抽象类除了继承别无他法。</p>
+<p>接口和抽象类可以搭配使用，接口中定义最基础的方法，抽象类实现这些基本的方法，其他子类可以选择是否继承这个抽象类，也可以选择实现最顶层的接口。这样更加灵活。例如Map.Entry的实现，因为接口中不能重写Object的equals和hashcode方法，所以这两种最基本的方法交给抽象类实现。</p>
+<h2 id="21-为后代设计接口"><a href="#21-为后代设计接口" class="headerlink" title="21. 为后代设计接口"></a>21. 为后代设计接口</h2><p>Java8中添加了默认方法，目的是为了可以将方法加入现有的接口，但是在现有接口里添加的新方法是充满风险的。</p>
+<p>在Java 8里，很多新的默认方法都被加入核心的集合接口里，这主要是为了促进lambda表达式的使用。</p>
+<p>因为在接口中加入默认方法虽然可以通过编译但是在运行时可能会出错，这种事件不常有但是并不是不存在。因此应该避免在接口中添加新的default方法。如果必须要添加的话，需要考虑现有的实现类是否会收到影响。</p>
+<h2 id="22-接口只用于定义类型"><a href="#22-接口只用于定义类型" class="headerlink" title="22. 接口只用于定义类型"></a>22. 接口只用于定义类型</h2><p>当类实现接口时，该接口作为实现类实例的引用。有种接口不符合这种目的，即常量接口，这种接口不包方法，只有静态final常量。</p>
+<p>常量接口的缺点：</p>
+<p>实现这个常量接口的实现类会泄露这些细节，这个类的子类的命名空间都会被接口的常量污染。</p>
+<p>如果想要导出常量，有两种合适的方式。</p>
+<ol>
+<li>将这些常量添加到类或者相关的接口里。</li>
+<li>新增枚举类型来导出这些常量。</li>
+<li>这些常量放在不可初始化的工具类里面。</li>
+<li>总之，接口应该只被用来定义类型。它们不能仅仅是用来导出常量。</li>
+</ol>
+<h2 id="23-类层次优于标签类"><a href="#23-类层次优于标签类" class="headerlink" title="23. 类层次优于标签类"></a>23. 类层次优于标签类</h2><p>标签类和类的层次：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Figure</span> &#123;</span><br><span class="line">    <span class="keyword">enum</span> <span class="title class_">Shape</span> &#123; RECTANGLE, CIRCLE &#125;;</span><br><span class="line">    <span class="comment">// Tag field - the shape of this figure</span></span><br><span class="line">    <span class="keyword">final</span> Shape shape;</span><br><span class="line">    <span class="comment">// These fields are used only if shape is RECTANGLE</span></span><br><span class="line">    <span class="type">double</span> length;</span><br><span class="line">    <span class="type">double</span> width;</span><br><span class="line">    <span class="comment">// This field is used only if shape is CIRCLE</span></span><br><span class="line">    <span class="type">double</span> radius;</span><br><span class="line">    <span class="comment">// Constructor for circle</span></span><br><span class="line">    Figure(<span class="type">double</span> radius) &#123;</span><br><span class="line">        shape = Shape.CIRCLE;</span><br><span class="line">        <span class="built_in">this</span>.radius = radius;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// Constructor for rectangle</span></span><br><span class="line">    Figure(<span class="type">double</span> length, <span class="type">double</span> width) &#123;</span><br><span class="line">        shape = Shape.RECTANGLE;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span>(shape) &#123;</span><br><span class="line">            <span class="keyword">case</span> RECTANGLE:</span><br><span class="line">                <span class="keyword">return</span> length * width;</span><br><span class="line">            <span class="keyword">case</span> CIRCLE:</span><br><span class="line">                <span class="keyword">return</span> Math.PI * (radius * radius);</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">AssertionError</span>(shape);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Class hierarchy replacement for a tagged class</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Figure</span> &#123;</span><br><span class="line">    <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">Figure</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">double</span> radius;</span><br><span class="line">    Circle(<span class="type">double</span> radius) &#123; </span><br><span class="line">        <span class="built_in">this</span>.radius = radius; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> Math.PI * (radius * radius); </span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">extends</span> <span class="title class_">Figure</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">double</span> length;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">double</span> width;</span><br><span class="line">    Rectangle(<span class="type">double</span> length, <span class="type">double</span> width) &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> length * width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应该避免标签类，标签类中有标签域，Switch语句，如果想要添加新的标签，必须在Switch语句中加case分支，否则会运行失败，标签类太过冗长并且不易阅读，出错率高。</p>
+<p>我们可以将标签类转化为类层次的结构。</p>
+<p>通过抽象出公有的标签值的方法。让每个子类继承抽象类，定义自己特有的数据域。</p>
+<p>类层次的优点是，提高了代码的灵活性，清晰的展示了类之间的层次关系，并且可进行更好的变异检查。</p>
+<h2 id="24-静态成员类优于非静态成员类"><a href="#24-静态成员类优于非静态成员类" class="headerlink" title="24. 静态成员类优于非静态成员类"></a>24. 静态成员类优于非静态成员类</h2><p>嵌套类是为了服务它所在的外围类。如果一个嵌套类还可以用于其他地方，那么应该单独放一个源文件里。</p>
+<p>嵌套类的种类：静态成员类，非静态成员类，匿名内部类，局部类。</p>
+<p>静态成员类：可以声明再其他类的内部，并且可以访问外围的所有成员变量。通常用法是和外围的类一块使用处理简单逻辑。</p>
+<p>非静态成员类：不被static修饰的成员类，非静态实例被创建时就与外部类关联，并且关联后不可修改。常被用来定义适配器，例如Set,List中通过非静态成员类实现他们自己的迭代器。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MySet</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">AbstractSet</span>&lt;E&gt; &#123;</span><br><span class="line">... <span class="comment">// Bulk of the class omitted</span></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;E&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyIterator</span>();</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">MyIterator</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;E&gt; &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果你声明了一个不需要访问外围实例的成员类，那你总是应该static修饰符加到声明里去</strong>，使得这个成员类是静态的。如果你不加这个修饰符，那么每个实例都将包含一个隐藏的外围实例的引用。更严重的是，当这个外围实例已经满足垃圾回收的条件时，非静态成员类实例会导致外围实例被保留。因此而导致的内存泄露是灾难性的。</p>
+<p>匿名类：不是外围类的成员，没有名字，在代码任意一个表达式合法的地方，匿名类都可以使用。匿名类使用的限制：在声明之后无法再初始化，并且不能通过instanceof测试或者指定类名的操作，匿名类必须简短，否则会影响可读性。匿名类的另一个用法是实现静态工厂方法。lambda表达式出现后，创建小的函数对象通常首选lambda。</p>
+<h2 id="25-限制源文件为单个顶级类"><a href="#25-限制源文件为单个顶级类" class="headerlink" title="25. 限制源文件为单个顶级类"></a>25. 限制源文件为单个顶级类</h2><p>永远不要将多个顶级类或接口放到一个源文件里。遵守这条规则就能保证在编译时不会遇到一个类有多个定义的情况。这又保证了编译产生的class文件和随之产生的程序行为不会依赖于传给编译器的源文件顺序。</p>
+<p>程序的行为受传递给编译器的源文件顺序的影响，这是无法接受的。</p>
+<p>解决方法那就是将这些顶级类分别写到各自的源文件里去。如果你尝试将多个顶级类放入同一个源文件，可以考虑使用静态成员类（条目）作为将不同类拆分为单独源文件的替代办法。</p>
+<p>如果某些类是为其他类提供服务的，那么将这些类声明为静态私有成员类，这样可以减少类的可访问性，并且增强可阅读性。</p>
+<h1 id="第四章-泛型"><a href="#第四章-泛型" class="headerlink" title="第四章 泛型"></a>第四章 泛型</h1><h2 id="26-不要使用原始类型"><a href="#26-不要使用原始类型" class="headerlink" title="26. 不要使用原始类型"></a>26. 不要使用原始类型</h2><p>泛型类型：接口和泛型类</p>
+<p>泛型类型都定义了一组参数化的类型，如List<String> 表示元素是String类型的列表。</p>
+<p>不应该使用原始类型，如List list = new ArrayList();</p>
+<p>这样做如果加入的对象类型不一样虽，然可以通过编译，但是运行时会报错ClassCastException异常异常；应该使用参数化类型，这样在编译期间就可以发现错误，更加安全。</p>
+<p>无限制通配符类型：Set&lt;?&gt;（读作，某些类型的集合），他和原始类型的区别是，通配符类型更加安全，当你讲任意非null得元素放入集合总，就会产生编译时错误。</p>
+<p>原始类型被提供仅是为了兼容性以及能与引入泛型之前的遗留代码互用。</p>
+<p>原始类型可以用在以下两种情况：</p>
+<ol>
+<li>List.class,Set.class,</li>
+<li>if(o instanceof Set)</li>
+</ol>
+<h2 id="27-消除未检查警告"><a href="#27-消除未检查警告" class="headerlink" title="27. 消除未检查警告"></a>27. 消除未检查警告</h2><p>如果你无法消除某个警告，但是这个警告的代码是安全的，可以使用@SuppressWarnings(“unchecked”)注解来禁止这个警告。</p>
+<p>SuppressWarnings注解可以声明在局部变量，方法，类上，但是应该尽可能的在小的作用域使用。每次使用这个注解应该加上注释，说明类型转换是安全的，可以帮别人理解这段代码。</p>
+<p>每个未检查警告都表示可能在运行时出现ClassCastException异常，所以不要忽视他们。</p>
+<h2 id="28-列表优先于数组"><a href="#28-列表优先于数组" class="headerlink" title="28. 列表优先于数组"></a>28. 列表优先于数组</h2><p>数组与列表的区别:</p>
+<p>协变性：如果Sub是Super的一个子类型，那么数组类型Sub[]也是数组类型Super[]的子类型。</p>
+<p>可具化：在运行时才知道并检查元素类型。</p>
+<p>数组是协变的并可具化的；泛型是受约束并且可擦除的。因此，数组提供了运行时类型安全性但不保证编译时类型安全性，泛型则反过来。通常，数组和泛型不能很好混用.</p>
+<p>数组在运行时才去检查元素的类型，如果将一个String加入Long的数组里，会抛出一个ArrayStoreException；泛型是在编译期间去检查的，运行时会擦除元素类型，泛型擦除使得泛型类型可以自由与从未使用过泛型的代码互相调用。因此使用泛型列表可以尽早发现错误。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  generic array creation is illegal - won&#x27;t compile</span></span><br><span class="line">List&lt;String&gt;[] stringLists = <span class="keyword">new</span> <span class="title class_">List</span>&lt;String&gt;[<span class="number">1</span>]; <span class="comment">// (1)</span></span><br><span class="line">List&lt;Integer&gt; intList = List.of(<span class="number">42</span>); <span class="comment">// (2)</span></span><br><span class="line">Object[] objects = stringLists; <span class="comment">// (3)</span></span><br><span class="line">objects[<span class="number">0</span>] = intList; <span class="comment">// (4)</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> stringLists[<span class="number">0</span>].get(<span class="number">0</span>); <span class="comment">// (5)</span></span><br></pre></td></tr></table></figure>
+
+<p>为了尽可能避免出现泛型数组创建错误或者未检查异常，最好优先使用集合类型，它更安全。</p>
+<h2 id="29-优先考虑使用泛型类"><a href="#29-优先考虑使用泛型类" class="headerlink" title="29. 优先考虑使用泛型类"></a>29. 优先考虑使用泛型类</h2><p>与强制转换类型相比，泛型更方便和安全，这通常意味着设计更加通用，客户端代码不用强制转换类型就可以使用泛型类的方法。</p>
+<h2 id="30-优先考虑使用泛型方法"><a href="#30-优先考虑使用泛型方法" class="headerlink" title="30. 优先考虑使用泛型方法"></a>30. 优先考虑使用泛型方法</h2><p>Collections类的所有“算法”方法（如binarySearch方法和sort方法）都是泛型的。</p>
+<p>常用泛型方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// union s1 s2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="title function_">union</span><span class="params">(Set&lt;E&gt; s1, Set&lt;E&gt; s2)</span> &#123;</span><br><span class="line">    Set&lt;E&gt; result = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(s1);</span><br><span class="line">    result.addAll(s2);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>泛型单例方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> UnaryOperator&lt;Object&gt; IDENTITY_FN = (t) -&gt; t;</span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; UnaryOperator&lt;T&gt; <span class="title function_">identityFunction</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (UnaryOperator&lt;T&gt;) IDENTITY_FN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>递归类型限制：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 任意能和自身比较的类型E</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E <span class="keyword">extends</span> <span class="title class_">Comparable</span>&lt;E&gt;&gt; E <span class="title function_">max</span><span class="params">(Collection&lt;E&gt; c)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>应该保证你的方法不用客户端强转就能用，这意味着要将这些方法泛型化，你也应该将现有方法泛型化，让新用户用起来更简单，而且不用破坏现有客户端。</p>
+<h2 id="31-使用有限制通配符来增加API灵活性"><a href="#31-使用有限制通配符来增加API灵活性" class="headerlink" title="31. 使用有限制通配符来增加API灵活性"></a>31. 使用有限制通配符来增加API灵活性</h2><p>通配符类型：&lt;? super E&gt;, &lt;? extend E&gt;</p>
+<p>使用通配符的基本原则：PESC，一个参数化类型表示T类型的生产者，用&lt;? extend E&gt;；如果一个参数化类型代表一个T类型的消费者，则使用&lt;? super T&gt;。GET和PUT 原则。</p>
+<p>通配符如果使用得当，对使用者来讲通配符的添加几乎是不可见的，通配符使得这些方法应该接收哪些参数，拒绝哪些参数。</p>
+<p>返回类型不要用限制的通配符。因为这样强制客户端使用通配符类型。</p>
+<h2 id="32-合理结合泛型和变长参数"><a href="#32-合理结合泛型和变长参数" class="headerlink" title="32. 合理结合泛型和变长参数"></a>32. 合理结合泛型和变长参数</h2><p>可变长参数的目的是为了允许客户端可以在方法里传入数量可变的参数，当你调用一个变长参数方法时，一个数组就会被创建，并用来存储这些参数，当变长参数是泛型类型或者参数化类型时，会得到编译器警告。</p>
+<p>@SafeVarargs注解表示允许可变参数的方法使用泛型，并且禁止警告。除非确定了使用是安全的，否则不要使用这个注解。并且这个注解只对不重写的方法时合法的，Java8中仅仅对静态方法和final实例方法合法。</p>
+<p>泛型可变参数是安全的情况：</p>
+<ol>
+<li>不在可变参数数组中存储数据</li>
+<li>对外部代码不可见。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span>&lt;T&gt;List&lt;T&gt;pickTwo(Ta,Tb,Tc)&#123;</span><br><span class="line"><span class="keyword">switch</span>(rnd.nextInt(<span class="number">3</span>)) &#123;</span><br><span class="line"> <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">return</span> List.of(a, b);</span><br><span class="line"> <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">return</span> List.of(a, c);</span><br><span class="line"> <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span> List.of(b, c);</span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">AssertionError</span>(); <span class="number">8</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;    </span><br><span class="line">  List&lt;String&gt; attributes = pickTwo(<span class="string">&quot;Good&quot;</span>, <span class="string">&quot;Fast&quot;</span>, <span class="string">&quot;Cheap&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="33-考虑类型安全的异构容器"><a href="#33-考虑类型安全的异构容器" class="headerlink" title="33.考虑类型安全的异构容器"></a>33.考虑类型安全的异构容器</h2><p>泛型在容器中通常用法限制了每个容器类型参数的数量，可以使用Class对象作为类型安全异构容器的key，value是对应参数类型，以这种方式使用的Class对象被叫做类型令牌。</p>
+<p>Favorites类称为类型安全的异构容器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Favorites</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;Class&lt;?&gt;, Object&gt; favorites = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">  	<span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">putFavorite</span><span class="params">(Class&lt;T&gt; type, T instance)</span> &#123;</span><br><span class="line">    	favorites.put(type, type.cast(instance));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; T <span class="title function_">getFavorite</span><span class="params">(Class&lt;T&gt; type)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> type.cast(favorites.get(type));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Class</span>&lt;T&gt; &#123;</span><br><span class="line">    T <span class="title function_">cast</span><span class="params">(Object obj)</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第五章-枚举和注解"><a href="#第五章-枚举和注解" class="headerlink" title="第五章 枚举和注解"></a>第五章 枚举和注解</h1><h2 id="34-用枚举替换常量"><a href="#34-用枚举替换常量" class="headerlink" title="34.用枚举替换常量"></a>34.用枚举替换常量</h2><p>枚举类型（enum type）是指由一组固定的常量组成合法值的类型。在java 还没有引入枚举类型之前，通常使用int具名常量表示（如四季，月份，花色等）。</p>
+<p>Java枚举本质上是int值。枚举是单例的泛型化，是受控制的，每个数据都是final的，枚举还允许添加任意的方法和域，并实现任意的接口，提供了Object的所有方法，实现了Comparable和Searializable，并针对枚举类型的可任意改变性设计了序列化方式。</p>
+<p>枚举中的抽象方法必须被他所有常量中的具体方法覆盖。</p>
+<p>什么时候可以使用枚举？</p>
+<p>只要是在编译时已知的常量就可以使用枚举来代替。</p>
+<p>枚举相比于int常量的优点：更好的可读性，安全性，更加强大，如果有多个枚举值同时有共享的行为，考虑使用策略枚举。</p>
+<h2 id="35-使用实例域来替换序数"><a href="#35-使用实例域来替换序数" class="headerlink" title="35.使用实例域来替换序数"></a>35.使用实例域来替换序数</h2><p>每个枚举都有一个ordinal方法，他返回每个枚举在类型中的数字位置。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Ensemble</span> &#123;</span><br><span class="line">    SOLO, DUET, TRIO, QUARTET, QUINTET,</span><br><span class="line">    SEXTET, SEPTET, OCTET, NONET, DECTET;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numberOfMusicians</span><span class="params">()</span> &#123; <span class="keyword">return</span> ordinal() + <span class="number">1</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果改变枚举变量中的顺序就会将这些常量重新排序，numberOfMusicians方法就会被破坏。</p>
+<p>永远不要根据枚举的序数导出与它关联的值，而是要将它保存在一个实例域中：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Ensemble</span> &#123;</span><br><span class="line">    SOLO(<span class="number">1</span>), DUET(<span class="number">2</span>), TRIO(<span class="number">3</span>), QUARTET(<span class="number">4</span>), QUINTET(<span class="number">5</span>),</span><br><span class="line">    SEXTET(<span class="number">6</span>), SEPTET(<span class="number">7</span>), OCTET(<span class="number">8</span>), DOUBLE_QUARTET(<span class="number">8</span>),</span><br><span class="line">    NONET(<span class="number">9</span>), DECTET(<span class="number">10</span>), TRIPLE_QUARTET(<span class="number">12</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> numberOfMusicians;</span><br><span class="line">    Ensemble(<span class="type">int</span> size) &#123; <span class="built_in">this</span>.numberOfMusicians = size; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numberOfMusicians</span><span class="params">()</span> &#123; <span class="keyword">return</span> numberOfMusicians; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="36-使用EnumSet替换位域"><a href="#36-使用EnumSet替换位域" class="headerlink" title="36.使用EnumSet替换位域"></a>36.使用EnumSet替换位域</h2><p>位域：使用位运算讲几个常量合并到一个集合中，这个集合就是位域。</p>
+<p>当打印输出位域时，很难理解这些常量的含义。所以使用EnumSet来代替。</p>
+<p>EnumSet的优点：性能好（removeAll,retainAll方法都是利用位运算实现的），并且枚举更简洁表示含义更清晰。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Text</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Style</span> &#123; BOLD, ITALIC, UNDERLINE, STRIKETHROUGH &#125;</span><br><span class="line">    <span class="comment">// Any Set could be passed in, but EnumSet is clearly best</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">applyStyles</span><span class="params">(Set&lt;Style&gt; styles)</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用EnumSet.of()</span></span><br><span class="line">text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));</span><br></pre></td></tr></table></figure>
+
+<h2 id="37-使用EnumMap替换序数索引"><a href="#37-使用EnumMap替换序数索引" class="headerlink" title="37.使用EnumMap替换序数索引"></a>37.使用EnumMap替换序数索引</h2><p>有时会用到Enum.ordinal方法，但是不推荐使用。</p>
+<p>例如现在想要列出植物园中一年生，两年生，多年生植物。需要创建集合数组，每个生命周期的植物是一个集合。遍历整个花园的植物将对应生命周期的植物放在对应的集合中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Set&lt;Plant&gt;[] plantsByLifeCycle =</span><br><span class="line">    (Set&lt;Plant&gt;[]) <span class="keyword">new</span> <span class="title class_">Set</span>[Plant.LifeCycle.values().length];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; plantsByLifeCycle.length; i++)</span><br><span class="line">    plantsByLifeCycle[i] = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Plant p : garden)</span><br><span class="line">    plantsByLifeCycle[p.lifeCycle.ordinal()].add(p);</span><br><span class="line"><span class="comment">// Print the results</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; plantsByLifeCycle.length; i++) &#123;</span><br><span class="line">    System.out.printf(<span class="string">&quot;%s: %s%n&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为数组不兼容泛型，也不知道数组中的索引代表什么，如果使用出错会抛出 ArrayIndexOutOfBoundsException 异常 。</p>
+<p>可以使用EnumMap来代替数组的形式。Map的key是植物的生命周期枚举类型，value对应的是这种生命周期的所有植物。其实EnumMap内部就了这样的一个索引数组，只是隐藏操作数组的细节。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Plant.LifeCycle, Set&lt;Plant&gt;&gt;  plantsByLifeCycle =</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">EnumMap</span>&lt;&gt;(Plant.LifeCycle.class);</span><br><span class="line"><span class="keyword">for</span> (Plant.LifeCycle lc : Plant.LifeCycle.values())</span><br><span class="line">    plantsByLifeCycle.put(lc, <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;());</span><br><span class="line"><span class="keyword">for</span> (Plant p : garden)</span><br><span class="line">    plantsByLifeCycle.get(p.lifeCycle).add(p);</span><br></pre></td></tr></table></figure>
+
+<p>总之使用EnumMap来代替索引数组，当出现对象之间的关系是多维的，使用EnumMap&lt;key1, EnumMap&lt;key,2 val&gt;&gt;</p>
+<h2 id="38-使用接口来模仿可扩展的枚举"><a href="#38-使用接口来模仿可扩展的枚举" class="headerlink" title="38.使用接口来模仿可扩展的枚举"></a>38.使用接口来模仿可扩展的枚举</h2><p>操作码用例可以使用可伸缩性的枚举类型实现。操作码的元素表示在某种机器上的操作。</p>
+<p>定义操作接口，枚举实现这个接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Emulated extensible enum using an interface</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">apply</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">BasicOperation</span> <span class="keyword">implements</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    PLUS(<span class="string">&quot;+&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">apply</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span> &#123; <span class="keyword">return</span> x + y; &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    MINUS(<span class="string">&quot;-&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">apply</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span> &#123; <span class="keyword">return</span> x - y; &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    TIMES(<span class="string">&quot;*&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">apply</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span> &#123; <span class="keyword">return</span> x * y; &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    DIVIDE(<span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">apply</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span> &#123; <span class="keyword">return</span> x / y; &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String symbol;</span><br><span class="line">        BasicOperation(String symbol) &#123;</span><br><span class="line">        <span class="built_in">this</span>.symbol = symbol;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> symbol;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然枚举不能多实现但是，接口支持多实现，可以定义多个枚举实现这个接口。并用新的实现类代替基本类型。</p>
+<p>用接口实现可伸缩枚举的不足之处是：枚举不能继承另一个枚举。如果代码不依赖任何枚举的状态，就可以在接口中添加默认实现。java.nio.file.LinkOption 枚举类型实现了 CopyOption 和 OpenOption 接口。</p>
+<h2 id="39-注解优先于命名模式"><a href="#39-注解优先于命名模式" class="headerlink" title="39.注解优先于命名模式"></a>39.注解优先于命名模式</h2><p>命名模式：表名一些程序需要通过某种工具或者框架进行特殊处理。</p>
+<p>缺点：</p>
+<ol>
+<li>如果命名出现错误，就不会执行但是也不会报错。</li>
+<li>不能确保他们只用在相应的程序元素上。比如有个名字叫TestSafetyMechanisms的类，想要测试这个类中的所有方法，但是Junit3不会执行，因为这个类中的方法名不是test开头的。</li>
+<li>命名模式没有提供将参数值将程序元素相关联的方法。</li>
+</ol>
+<p>JUnit 从第 4 版开始采用@Test注解，解决了以上问题。Test注解只在方法上起作用，不能被用在类上或者其他元素上，否则编译不过。因为Test注解没有参数所以叫做标记注解。注解永远不会改变被注解代码的语义，但是使它可以通过工具进行特殊的处理。</p>
+<p>注解的处理是使用反射执行标记了注解的方法，在执行过程中捕获异常并打印日志，还可以获取到注解上的参数，并校验参数类型。注解中的数组参数语法很灵活，指定多元素数组使用{}包裹，并用逗号分隔开。</p>
+<h2 id="40-坚持使用Overide注解"><a href="#40-坚持使用Overide注解" class="headerlink" title="40. 坚持使用Overide注解"></a>40. 坚持使用Overide注解</h2><p>@Override注解用户方法声明，表示被注解的方法会覆盖父类的方法，如果坚持使用这个注解，可以防止一大类的非法错误。</p>
+<p>比如Bigram类本身想要重写父类Object的hashCode和toString方法，但是因为类型错误，没能覆盖而是重载了equals方法。并且因为没有标注@Overide所以在编译的时候没能发现这个错误。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Can you spot the bug?</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bigram</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">char</span> first;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">char</span> second;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Bigram</span><span class="params">(<span class="type">char</span> first, <span class="type">char</span> second)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.second = second;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 参数类型应该是Object</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Bigram b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> b.first == first &amp;&amp; b.second == second;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">31</span> * first + second;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Set&lt;Bigram&gt; s = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> <span class="string">&#x27;a&#x27;</span>; ch &lt;= <span class="string">&#x27;z&#x27;</span>; ch++)</span><br><span class="line">                s.add(<span class="keyword">new</span> <span class="title class_">Bigram</span>(ch, ch));</span><br><span class="line">        System.out.println(s.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="41-标记接口定义接口类型"><a href="#41-标记接口定义接口类型" class="headerlink" title="41. 标记接口定义接口类型"></a>41. 标记接口定义接口类型</h2><p>标记接口：接口中不包含任何方法声明。例如Serilizable接口。</p>
+<p>标记接口比标记注解的两个优点：</p>
+<ol>
+<li>标记接口定义的类型是可被实例类实现的，但是注解不行。标记接口类型允许在编译时捕获错误但是注释只能在运行时捕获错误。</li>
+<li>可以被更加精确的锁定，如果注解类型使用ElementType.TYPE声明，他就表示可以被应用到任何类或者接口。</li>
+</ol>
+<p>什么时候使用标记注解？</p>
+<p>如果标记的不是类和接口，就使用注解。如果标记要应用到类和接口这时候考虑我是否想要编写一个或者多个具有该标记的方法呢？如果是就优先使用标记接口。</p>
+<h1 id="第六章-Lambda和Stream"><a href="#第六章-Lambda和Stream" class="headerlink" title="第六章 Lambda和Stream"></a>第六章 Lambda和Stream</h1><h2 id="42-lambda表达式优先于匿名类"><a href="#42-lambda表达式优先于匿名类" class="headerlink" title="42. lambda表达式优先于匿名类"></a>42. lambda表达式优先于匿名类</h2><p>在Java8之前创建函数对象的主要方式是匿名类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collections.sort(words, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String s1, String s2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.compare(s1.length(), s2.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>匿名类适用于需要函数对象的经典面向对象设计模式，尤其是策略模式，比较器接口是排序的抽象策略。</p>
+<p>在Java8中引入了函数式接口，允许使用lambda表达式创建这些接口实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collections.sort(words,</span><br><span class="line">        (s1, s2) -&gt; Integer.compare(s1.length(), s2.length()));</span><br></pre></td></tr></table></figure>
+
+<p>编译器从上下文中根据类型推断推导出这些参数的类型，在某些时候，需要指定参数类型，否则编译器无法确定这些参数类型。</p>
+<p>与其他方法和类不同，lambda没有名称和文档；如果计算不是自解释的，或者超过几行，则不要将其放入lambda表达式中，如果lambda表达式太长会影响可读性。</p>
+<p>除非必须创建非函数式接口类型的实例，否则不要使用匿名类作为函数对象。</p>
+<h2 id="43-方法引用优于lambda表达式"><a href="#43-方法引用优于lambda表达式" class="headerlink" title="43. 方法引用优于lambda表达式"></a>43. 方法引用优于lambda表达式</h2><p>lambda优于匿名类的主要优点是更加简洁，Java提供了生成函数对象的方法比lambda还要简洁。两者在选用过程中哪个简洁使用哪个。</p>
+<table>
+<thead>
+<tr>
+<th><strong>Method Ref Type</strong></th>
+<th><strong>Example</strong></th>
+<th><strong>Lambda Equivalent</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static</td>
+<td>Integer::parseInt</td>
+<td>str -&gt; Integer.parseInt(str)</td>
+</tr>
+<tr>
+<td>Bound</td>
+<td>Integer::parseIntr</td>
+<td>Instant then = Instant.now(); t -&gt; then.isAfter(t)</td>
+</tr>
+<tr>
+<td>Unbound</td>
+<td>String::toLowerCase</td>
+<td>str -&gt; str.toLowerCase()</td>
+</tr>
+<tr>
+<td>Class Constructor</td>
+<td>TreeMap&lt;K, V&gt;::new</td>
+<td>() -&gt; new TreeMap&lt;K, V&gt;</td>
+</tr>
+<tr>
+<td>Array Constructor</td>
+<td>int[]::new</td>
+<td>len -&gt; new int[len]</td>
+</tr>
+</tbody></table>
+<h2 id="44-优先使用标准的函数式接口"><a href="#44-优先使用标准的函数式接口" class="headerlink" title="44. 优先使用标准的函数式接口"></a>44. 优先使用标准的函数式接口</h2><p>6哥基本的函数式接口</p>
+<table>
+<thead>
+<tr>
+<th><strong>Interface</strong></th>
+<th><strong>Function Signature</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UnaryOperator</td>
+<td>T apply(T t)</td>
+<td>String::toLowerCase</td>
+</tr>
+<tr>
+<td>BinaryOperator</td>
+<td>T apply(T t1, T t2)</td>
+<td>BigInteger::add</td>
+</tr>
+<tr>
+<td>Predicate</td>
+<td>boolean test(T t)</td>
+<td>Collection::isEmpty</td>
+</tr>
+<tr>
+<td>Function&lt;T,R&gt;</td>
+<td>R apply(T t)</td>
+<td>Arrays::asList</td>
+</tr>
+<tr>
+<td>Supplier</td>
+<td>T get()</td>
+<td>Instant::now</td>
+</tr>
+<tr>
+<td>Consumer</td>
+<td>void accept(T t)</td>
+<td>System.out::println</td>
+</tr>
+</tbody></table>
+<p>如果基本的函数式接口可以满足你的要求，那应该优先使用它而不是新建功能接口。</p>
+<p>Function接口有9个变体，如果源类型和结果类型都是基本类型则使用源类型作为前缀的Function，例如LongToIntFunction，如果源类型是基本类型但是结果类型是引用类型，则使用ToObj前缀的Function，如DoubleToObjFunction。</p>
+<p>什么时候考虑编写新的功能接口（Comparator）而不是使用标准接口？</p>
+<ul>
+<li>该接口将被普遍使用</li>
+<li>具有相关的约定</li>
+<li>受益于自定义的默认方法</li>
+</ul>
+<p>其他大部分情况使用Function提供的标准接口。</p>
+<h2 id="45-明智地使用streams"><a href="#45-明智地使用streams" class="headerlink" title="45. 明智地使用streams"></a>45. 明智地使用streams</h2><p>流：表示有限或无限的数据元素序列；</p>
+<p>流管道：表示对这些元素多阶段的结算</p>
+<p>流管道的计算是惰性的，直到调用teminal操作时才开始计算，并且对完成terminal操作不需要的数据元素不会计算。默认情况下流管道按照顺序运行。</p>
+<p>流API非常通用，实际上任何计算都可以使用流执行，如果使用得当可以使程序更加简短清晰。使用不当会导致程序难以读取和维护。</p>
+<p>lambda表达式的餐胡命名对于流管道的可读性至关重要。</p>
+<p>在流管道中使用helper方法比在循环中重要。</p>
+<p>在lambda表达式中，只能读取final的变量，不能修改任何局部变量。</p>
+<p>flatMap：将流扁平化。将Stream中的每个元素映射到新的流然后关联起来。</p>
+<h2 id="46-优先使用Stream无副作用的函数"><a href="#46-优先使用Stream无副作用的函数" class="headerlink" title="46. 优先使用Stream无副作用的函数"></a>46. 优先使用Stream无副作用的函数</h2><p>流管道编程的本质是无副作用的对象，这适用于传递给流和相关对象。foreach方法仅用于输出计算结果，还不适用于执行计算。收集器常见的有，toList，toSet，toMap，groupingBy和join。</p>
+<p>养成将collecto()方法中放静态方法的习惯，因为这样可读性更高。</p>
+<p>toMap操作如果一个key对应了多个流元素就会抛出IllegalStateException异常来终止。这时候使用三个参数的toMap()</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">toMap(keyMapper, valueMapper, (v1, v2) -&gt; v2)</span><br></pre></td></tr></table></figure>
+
+<p>当发生冲突，执行第三个参数设置的last-write-wins策略。</p>
+<h2 id="47-Stream优先使用Collection作为返回类型"><a href="#47-Stream优先使用Collection作为返回类型" class="headerlink" title="47. Stream优先使用Collection作为返回类型"></a>47. Stream优先使用Collection作为返回类型</h2><p>如果编写一个的方法知道会在流管道中使用，可以返回Stream，类似的如果仅用于遍历序列则可以返回Iterable接口。</p>
+<p>Collection是Iterable的子类型，因此可迭代并支持Stream，因此，Collection或者他的子类是返回方法的最佳返回类型。</p>
+<p>如果返回的数据量小并且可以放入内存中，那么最好返回标准的集合。如果数据太多，不要作为集合返回。</p>
+<h2 id="48-谨慎使用Stream并行"><a href="#48-谨慎使用Stream并行" class="headerlink" title="48. 谨慎使用Stream并行"></a>48. 谨慎使用Stream并行</h2><p>如果源来自 Stream.iterate，或者使用中间操作限制，并行化管道也不太可能提高其性能。所以不要不加选择的使用并行流导致性能灾难。</p>
+<p>并行性的性能增益最好是在 ArrayList，HashMap，HashSet 和 ConcurrentHashMap 实例上；int 数组；和 long 数组。因为它们都可以准确且分成任何所需大小的子范围。</p>
+<p>这使得在并行线程之间划分工作变得容易。</p>
+<p>并行流不仅有可能会导致性能上的问题，还可能导致不正确的结果和不可预测的行为（安全失败）。使用.map,filter其他不规范的功能丰富都可能导致并行的安全出问题。</p>
+<p>通常所有的并行流管道都在公共fork-join线程池中运行。单个行为不当的管道流会影响系统中其他不想关的部分。</p>
+<p>总之除非使用并行流之后得到的结果是正确的并且相比之前对性能上有预期的提升，否则不应该尝试使用并行的管道流。</p>
+<h1 id="第七章-方法"><a href="#第七章-方法" class="headerlink" title="第七章 方法"></a>第七章 方法</h1><h2 id="49-校验参数有效性"><a href="#49-校验参数有效性" class="headerlink" title="49. 校验参数有效性"></a>49. 校验参数有效性</h2><p>大多数方法包括购绽放发对于参数值都有某些限制，例如引用类型必须不能为null，数组下标必须大于等于0等。校验参数如果出现错误抛出一个参数娇艳异常，不在进行后续的操作。</p>
+<p>Java7中添加的 Objects.requireNonNull(Object obj, “errorMessage”) 可以校验对象引用不为null，比较灵活。</p>
+<p>Java 9 中，范围检查工具被添加到 java.util.Objects 中。该工具由三个方法组成：checkFromIndexSize，checkFromToIndex 和 checkIndex。此工具不如空检查方法灵活。它不允许你自定义异常的详细消息，它仅用于列表和数组索引。</p>
+<p>每当编写方法或者构造器的时候，应该考虑它的参数有哪些限制。应该把这些限制写到文档中，并且在这个方法体的开头处，通过显式的检查来校验这些限制。养成这样的习惯是非常重要的。</p>
+<h2 id="50-必要时进行保护性拷贝"><a href="#50-必要时进行保护性拷贝" class="headerlink" title="50. 必要时进行保护性拷贝"></a>50. 必要时进行保护性拷贝</h2><h1 id="第八章-通用设计"><a href="#第八章-通用设计" class="headerlink" title="第八章 通用设计"></a>第八章 通用设计</h1><h1 id="第九章-异常"><a href="#第九章-异常" class="headerlink" title="第九章 异常"></a>第九章 异常</h1><h1 id="第十章-并发"><a href="#第十章-并发" class="headerlink" title="第十章 并发"></a>第十章 并发</h1><h1 id="第十一章-序列化"><a href="#第十一章-序列化" class="headerlink" title="第十一章 序列化"></a>第十一章 序列化</h1><p>在线阅读地址：<a href="https://jiapengcai.gitbooks.io/effective-java/content/chapter1/di-1-tiao-ff1a-kao-lv-yong-jing-tai-fang-fa-er-bu-shi-gou-zao-qi.html">Effective Java</a></p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
   </entry>
 </search>
