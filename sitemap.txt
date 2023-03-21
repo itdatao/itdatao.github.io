@@ -1,3 +1,4 @@
+http://itdatao.github.io/archives/index.html
 http://itdatao.github.io/tags/index.html
 http://itdatao.github.io/categories/index.html
 http://itdatao.github.io/posts/21283aa4/
