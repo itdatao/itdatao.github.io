@@ -1,3 +1,5 @@
+http://itdatao.github.io/tags/index.html
+http://itdatao.github.io/categories/index.html
 http://itdatao.github.io/posts/21283aa4/
 http://itdatao.github.io/posts/3e7adddd/
 http://itdatao.github.io/posts/5bbc7517/
@@ -10,8 +12,6 @@ http://itdatao.github.io/posts/f0675471/
 http://itdatao.github.io/posts/37e41c9c/
 http://itdatao.github.io/posts/c24675b4/
 http://itdatao.github.io/posts/ae9b5bb0/
-http://itdatao.github.io/tags/index.html
-http://itdatao.github.io/categories/index.html
 http://itdatao.github.io/
 http://itdatao.github.io/tags/ES/
 http://itdatao.github.io/tags/MySQL/
