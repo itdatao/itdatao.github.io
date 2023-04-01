@@ -14,12 +14,12 @@ http://itdatao.github.io/posts/37e41c9c/
 http://itdatao.github.io/posts/c24675b4/
 http://itdatao.github.io/posts/ae9b5bb0/
 http://itdatao.github.io/
-http://itdatao.github.io/tags/ES/
 http://itdatao.github.io/tags/MySQL/
+http://itdatao.github.io/tags/ES/
 http://itdatao.github.io/tags/Java/
 http://itdatao.github.io/tags/interview/
-http://itdatao.github.io/tags/zookeeper/
-http://itdatao.github.io/tags/rocketMQ/
 http://itdatao.github.io/tags/spring/
+http://itdatao.github.io/tags/rocketMQ/
+http://itdatao.github.io/tags/zookeeper/
 http://itdatao.github.io/categories/kafka/
 http://itdatao.github.io/categories/interview/

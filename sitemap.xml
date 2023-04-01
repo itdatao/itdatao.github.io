@@ -146,14 +146,14 @@
 
   
   <url>
-    <loc>http://itdatao.github.io/tags/ES/</loc>
+    <loc>http://itdatao.github.io/tags/MySQL/</loc>
     <lastmod>2023-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://itdatao.github.io/tags/MySQL/</loc>
+    <loc>http://itdatao.github.io/tags/ES/</loc>
     <lastmod>2023-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -174,7 +174,7 @@
   </url>
   
   <url>
-    <loc>http://itdatao.github.io/tags/zookeeper/</loc>
+    <loc>http://itdatao.github.io/tags/spring/</loc>
     <lastmod>2023-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -188,7 +188,7 @@
   </url>
   
   <url>
-    <loc>http://itdatao.github.io/tags/spring/</loc>
+    <loc>http://itdatao.github.io/tags/zookeeper/</loc>
     <lastmod>2023-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
