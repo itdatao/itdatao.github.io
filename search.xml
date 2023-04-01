@@ -527,7 +527,22 @@
 <h2 id="59-了解和使用类库"><a href="#59-了解和使用类库" class="headerlink" title="59. 了解和使用类库"></a>59. 了解和使用类库</h2><p>使用标准类库，可以充分利用编写类库的专家知识；</p>
 <p>不需要浪费时间来为一个和工作关系不大的问题编写特别的解决方法，应该关注在应用程序上而不是底层实现。</p>
 <p>当你的需求比较特殊时，类库机制可能不会满足你的需求，这时候需要找第三方类库中看是否有合适的实现，比如Google的guava。否则的话就需要自己实现了。</p>
-<h2 id="60-精确值避免使用float和double"><a href="#60-精确值避免使用float和double" class="headerlink" title="60. 精确值避免使用float和double"></a>60. 精确值避免使用float和double</h2><h2 id="61-基本类型优于封装类型"><a href="#61-基本类型优于封装类型" class="headerlink" title="61. 基本类型优于封装类型"></a>61. 基本类型优于封装类型</h2><h2 id="62-其他类型合适时避免使用String"><a href="#62-其他类型合适时避免使用String" class="headerlink" title="62. 其他类型合适时避免使用String"></a>62. 其他类型合适时避免使用String</h2><h2 id="63-了解字符串拼接的性能"><a href="#63-了解字符串拼接的性能" class="headerlink" title="63. 了解字符串拼接的性能"></a>63. 了解字符串拼接的性能</h2><h1 id="第九章-异常"><a href="#第九章-异常" class="headerlink" title="第九章 异常"></a>第九章 异常</h1><h1 id="第十章-并发"><a href="#第十章-并发" class="headerlink" title="第十章 并发"></a>第十章 并发</h1><h1 id="第十一章-序列化"><a href="#第十一章-序列化" class="headerlink" title="第十一章 序列化"></a>第十一章 序列化</h1><p>在线阅读地址：<a href="https://jiapengcai.gitbooks.io/effective-java/content/chapter1/di-1-tiao-ff1a-kao-lv-yong-jing-tai-fang-fa-er-bu-shi-gou-zao-qi.html">Effective Java</a></p>
+<h2 id="60-精确值避免使用float和double"><a href="#60-精确值避免使用float和double" class="headerlink" title="60. 精确值避免使用float和double"></a>60. 精确值避免使用float和double</h2><p>对于任何需要精确计算的结果，都不要使用float和double，使用BigDecimal来替换他，BigDecimal还有一个优点是，可以控制舍入的位数。</p>
+<h2 id="61-基本类型优于封装类型"><a href="#61-基本类型优于封装类型" class="headerlink" title="61. 基本类型优于封装类型"></a>61. 基本类型优于封装类型</h2><p>基本类型和封装类型的三个不同点。</p>
+<ol>
+<li>基本类型比封装类型在时间和空间上更加节省</li>
+<li>基本类型只有值，封装类型还有可能为null</li>
+<li>封装类型除值的性质之外还有其他属性。虽然两个封装类型的值是一样的但是有可能是不同的对象。</li>
+</ol>
+<p>当面临选择的时候优先使用基本类型，因为基本类型简单且快速，当封装类型和基本类型混合计算的时候，会做拆箱的动作，这时有可能会抛出NullPointException。</p>
+<h2 id="62-其他类型合适时避免使用String"><a href="#62-其他类型合适时避免使用String" class="headerlink" title="62. 其他类型合适时避免使用String"></a>62. 其他类型合适时避免使用String</h2><p>String是专门用来表示文本的，如果是数值类型不应该使用String表示。如果是是否选择问题应该转换成枚举或者boolean类型。</p>
+<p>如果存在更加合适数据类型（或者可以编写一个）的时候，要避免习惯地使用字符串来表示对象。使用不当的话，String比其他类型会更加笨重、不灵活、慢、容易出错。很容易被错用成String的类型主要有基本类型、枚举类型和聚合类型。</p>
+<h2 id="63-了解字符串拼接的性能"><a href="#63-了解字符串拼接的性能" class="headerlink" title="63. 了解字符串拼接的性能"></a>63. 了解字符串拼接的性能</h2><p>大规模字符串连接时，使用+操作符，需要的时间是N^2，因为字符串是不可变的，当两个字符串进行连接的时候，，需要将他们的内容都复制一下。</p>
+<p>因此在字符串拼接的时候为了打到可接受的性能，可以使用StringBuilder代替String来保存构造过程中的声明。</p>
+<h2 id="64-使用接口引用对象"><a href="#64-使用接口引用对象" class="headerlink" title="64. 使用接口引用对象"></a>64. 使用接口引用对象</h2><p>如果你养成了使用接口作为类型的习惯，程序就会变得非常灵活。无论是返回类型，参数类型，变量等都应该使用接口类型声明。</p>
+<p>当没有合适的接口存在的时候，使用类而不是接口来引用对象，是非常合适的。比如String和BigInteger，通常返回是final的，也很少有对应的接口。</p>
+<p>总的来讲，如果一个对象有合适的接口，使用接口来引用对象；如果没有合适的接口，就选择能够提供需要功能的最小的类。</p>
+<h2 id="65-j接口优于反射"><a href="#65-j接口优于反射" class="headerlink" title="65. j接口优于反射"></a>65. j接口优于反射</h2><h2 id="66-谨慎的使用本地方法"><a href="#66-谨慎的使用本地方法" class="headerlink" title="66. 谨慎的使用本地方法"></a>66. 谨慎的使用本地方法</h2><h2 id="67-谨慎优化"><a href="#67-谨慎优化" class="headerlink" title="67. 谨慎优化"></a>67. 谨慎优化</h2><h2 id="68-遵守命名规范"><a href="#68-遵守命名规范" class="headerlink" title="68. 遵守命名规范"></a>68. 遵守命名规范</h2><h1 id="第九章-异常"><a href="#第九章-异常" class="headerlink" title="第九章 异常"></a>第九章 异常</h1><h1 id="第十章-并发"><a href="#第十章-并发" class="headerlink" title="第十章 并发"></a>第十章 并发</h1><h1 id="第十一章-序列化"><a href="#第十一章-序列化" class="headerlink" title="第十一章 序列化"></a>第十一章 序列化</h1><p>在线阅读地址：<a href="https://jiapengcai.gitbooks.io/effective-java/content/chapter1/di-1-tiao-ff1a-kao-lv-yong-jing-tai-fang-fa-er-bu-shi-gou-zao-qi.html">Effective Java</a></p>
 ]]></content>
       <tags>
         <tag>Java</tag>
