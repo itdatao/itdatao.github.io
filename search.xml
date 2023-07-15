@@ -1230,7 +1230,9 @@
   <entry>
     <title>ddia</title>
     <url>/posts/54545d94/</url>
-    <content><![CDATA[<h1 id="一致性和共识"><a href="#一致性和共识" class="headerlink" title="一致性和共识"></a>一致性和共识</h1><p>主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？</p>
+    <content><![CDATA[<span id="more"></span>
+
+<h1 id="一致性和共识"><a href="#一致性和共识" class="headerlink" title="一致性和共识"></a>一致性和共识</h1><p>主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？</p>
 <p>收敛：最终一致性的另一个名字。</p>
 <p>复制过程需要保证最终一致性，预计所有副本都会最终收敛到相同的值。</p>
 <p>本章主要探索数据系统的强一致性。强一致性要比弱一致性的系统具有更差的性能或者更少的容错性。</p>
@@ -1246,7 +1248,8 @@
   <entry>
     <title>租房经验</title>
     <url>/posts/7f48cdf5/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p>常见的租房问题  </p>
+<span id="more"></span>
 
 <h2 id="租房软件整理"><a href="#租房软件整理" class="headerlink" title="租房软件整理"></a>租房软件整理</h2><ul>
 <li><p>租房如果时间比较紧急，预算充足可以试试自如，比较方便，其他平台贝壳、链家、我爱我家这种我同事和亲戚也用过感觉还可以。</p>
