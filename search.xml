@@ -542,7 +542,39 @@
 <h2 id="64-使用接口引用对象"><a href="#64-使用接口引用对象" class="headerlink" title="64. 使用接口引用对象"></a>64. 使用接口引用对象</h2><p>如果你养成了使用接口作为类型的习惯，程序就会变得非常灵活。无论是返回类型，参数类型，变量等都应该使用接口类型声明。</p>
 <p>当没有合适的接口存在的时候，使用类而不是接口来引用对象，是非常合适的。比如String和BigInteger，通常返回是final的，也很少有对应的接口。</p>
 <p>总的来讲，如果一个对象有合适的接口，使用接口来引用对象；如果没有合适的接口，就选择能够提供需要功能的最小的类。</p>
-<h2 id="65-j接口优于反射"><a href="#65-j接口优于反射" class="headerlink" title="65. j接口优于反射"></a>65. j接口优于反射</h2><h2 id="66-谨慎的使用本地方法"><a href="#66-谨慎的使用本地方法" class="headerlink" title="66. 谨慎的使用本地方法"></a>66. 谨慎的使用本地方法</h2><h2 id="67-谨慎优化"><a href="#67-谨慎优化" class="headerlink" title="67. 谨慎优化"></a>67. 谨慎优化</h2><h2 id="68-遵守命名规范"><a href="#68-遵守命名规范" class="headerlink" title="68. 遵守命名规范"></a>68. 遵守命名规范</h2><h1 id="第九章-异常"><a href="#第九章-异常" class="headerlink" title="第九章 异常"></a>第九章 异常</h1><h1 id="第十章-并发"><a href="#第十章-并发" class="headerlink" title="第十章 并发"></a>第十章 并发</h1><h1 id="第十一章-序列化"><a href="#第十一章-序列化" class="headerlink" title="第十一章 序列化"></a>第十一章 序列化</h1><p>在线阅读地址：<a href="https://jiapengcai.gitbooks.io/effective-java/content/chapter1/di-1-tiao-ff1a-kao-lv-yong-jing-tai-fang-fa-er-bu-shi-gou-zao-qi.html">Effective Java</a></p>
+<h2 id="65-接口优于反射"><a href="#65-接口优于反射" class="headerlink" title="65. 接口优于反射"></a>65. 接口优于反射</h2><p>反射提供对人以类的编程式访问，给定一个Class对象，可以访问类的成员，域类型，方法等信息的能力。</p>
+<p>Method.invoke()方法可以调用任何类的任何对象上的任何方法。反射机制允许一个类使用另一个类，即使在被编译之后不存在。</p>
+<p>反射的缺点：</p>
+<ul>
+<li>丧失了编译时类型检查的好处。</li>
+<li>执行反射访问所需要的代码比较长。</li>
+<li>性能损失。</li>
+</ul>
+<p>对于复杂系统中特定的编程任务，反射是很有用的，但是它有很多缺点。如果编写的程序必须在编译时处理未知的类，则应该尽可能只使用反射实例化对象，并使用在编译时已知的接口或超类访问对象。</p>
+<h2 id="66-谨慎的使用本地方法"><a href="#66-谨慎的使用本地方法" class="headerlink" title="66. 谨慎的使用本地方法"></a>66. 谨慎的使用本地方法</h2><p>Java本地接口（JNI）允许Java程序调用本地方法，这些方法是C或者C++编写的，主要用于提供特定平台的设施访问，对本地代码库的访问，对遗留数据库的访问。并且JNI注重性能。</p>
+<p>在Java3以后，为了提高性能，很少使用本地方法，因为JVM已经做了性能优化，比如BigDecimal 1.3版本比1.1版本更快。</p>
+<p>本地方法移植性较差，更难调试，如果使用不当回造成内存泄漏，并且代码可读性不是很好。</p>
+<p>使用本地方法来访问底层资源或者本地库是可接受的但是需要完整彻底的测试。</p>
+<h2 id="67-谨慎优化"><a href="#67-谨慎优化" class="headerlink" title="67. 谨慎优化"></a>67. 谨慎优化</h2><p>比起其他原因，很多出错的地方是源于优化。刚开始不要想着性能上的小小得失，优化失败的代价远比不做优化大。尤其是过早的优化，弊大于利，甚至过程中可能会出现无法修复的bug。</p>
+<p>不能为了性能牺牲合理的架构，努力编写好的程序而不是快的程序。</p>
+<p>在设计系统过程中就应该考虑到性能问题，因为当系统架构满足不了当前需求和性能时需要推到重来。</p>
+<p>API设计对性能的影响是非常实际的。为了提升性能而改变API方法是一个非常糟糕的想法。</p>
+<p>性能优化在测试前后对比可能并没有显著的提升，有时候还会变的更糟，因此将90%的时间花在10%的代码上市不划算的。</p>
+<p>不同的硬件平台，版本，处理器上运行程序，性能是不一样的，有时候需要在环境和不同的实现上进行权衡。</p>
+<p>找到性能提升的点，需要使用JVM分析器，分析代码出现的问题根源。</p>
+<h2 id="68-遵守命名规范"><a href="#68-遵守命名规范" class="headerlink" title="68. 遵守命名规范"></a>68. 遵守命名规范</h2><p>包名和模块名应该是分层的，公司内部的包使用公司的域名开头，例如edu.cmu,com.google,org.eff。</p>
+<p>类，接口，枚举，注释等遵循大驼峰命名规则。</p>
+<p>方法名和字段名遵循小驼峰规则。</p>
+<p>常量应该大写单词组成，多个单词之间通过下划线分隔。</p>
+<p>类型参数名通常由单个字母组成，最常见的是T表示任意类型，E 表示集合的元素类型，K 和 V 表示 Map 的键和值类型，X 表示异常。函数的返回类型通常为 R。</p>
+<p>方法名通常用动词或者动词短语命名，boolean返回的方法名通常是is，has开头，后面跟名词或者动词短语。</p>
+<p>转换对象类型的方法通常是xxxToy，如toString()，toArray()；返回类型不同的视图，方法通常是以as开头。比如asList()，asType()。静态工厂的方法常见命名是from,of,valueOf,getInstance,newInstance等。</p>
+<h1 id="第九章-异常"><a href="#第九章-异常" class="headerlink" title="第九章 异常"></a>第九章 异常</h1><h2 id="69-仅在有异常条件下使用异常"><a href="#69-仅在有异常条件下使用异常" class="headerlink" title="69. 仅在有异常条件下使用异常"></a>69. 仅在有异常条件下使用异常</h2><p>因为异常是在特殊情况下设计的，所以JVM实现不会让他们和显示测试一样快。</p>
+<p>将代码用try-cache包裹会抑制JVM可能执行的某些优化。</p>
+<p>基于异常的循环会混淆代码并且降低代码的性能，而且不能保证他可以正常工作，如果循环中存在bug，使用异常进行流程控制会掩盖bug，从而增减调试过程的复杂性，假设循环体中的计算步骤调用了一个方法，该方法对一些不相关的数据执行越界访问，就会产生一个异常，导致线程立即终止，并带有完整的堆栈跟踪。但是如果用基于异常的循环，会误判为正常的循环终止条件。</p>
+<p>使用标准的易于识别的用法，而不是声称可以提供更好性能的技术，只要不可靠就不应该被使用。</p>
+<p>总之异常是为确有异常的情况设计的，不要将他们用于流程控制，也不要强制其他人这样做。</p>
+<h2 id="70-对可恢复的情况使用检查异常，对编程错误使用运行时异常"><a href="#70-对可恢复的情况使用检查异常，对编程错误使用运行时异常" class="headerlink" title="70.对可恢复的情况使用检查异常，对编程错误使用运行时异常"></a>70.对可恢复的情况使用检查异常，对编程错误使用运行时异常</h2><h2 id="71-避免使用不必要的checked异常"><a href="#71-避免使用不必要的checked异常" class="headerlink" title="71.避免使用不必要的checked异常"></a>71.避免使用不必要的checked异常</h2><h2 id="72-复用标准异常"><a href="#72-复用标准异常" class="headerlink" title="72.复用标准异常"></a>72.复用标准异常</h2><h2 id="73-抛出能用抽象解释的异常"><a href="#73-抛出能用抽象解释的异常" class="headerlink" title="73.抛出能用抽象解释的异常"></a>73.抛出能用抽象解释的异常</h2><h2 id="74-为每个方法记录会抛出的所有异常"><a href="#74-为每个方法记录会抛出的所有异常" class="headerlink" title="74.为每个方法记录会抛出的所有异常"></a>74.为每个方法记录会抛出的所有异常</h2><h2 id="75-异常详细消息中应该包含捕获失败的信息"><a href="#75-异常详细消息中应该包含捕获失败的信息" class="headerlink" title="75.异常详细消息中应该包含捕获失败的信息"></a>75.异常详细消息中应该包含捕获失败的信息</h2><h2 id="76-尽力保证故障的原子性"><a href="#76-尽力保证故障的原子性" class="headerlink" title="76.尽力保证故障的原子性"></a>76.尽力保证故障的原子性</h2><h2 id="77-不能忽略异常"><a href="#77-不能忽略异常" class="headerlink" title="77.不能忽略异常"></a>77.不能忽略异常</h2><h1 id="第十章-并发"><a href="#第十章-并发" class="headerlink" title="第十章 并发"></a>第十章 并发</h1><h1 id="第十一章-序列化"><a href="#第十一章-序列化" class="headerlink" title="第十一章 序列化"></a>第十一章 序列化</h1><p>在线阅读地址：<a href="https://jiapengcai.gitbooks.io/effective-java/content/chapter1/di-1-tiao-ff1a-kao-lv-yong-jing-tai-fang-fa-er-bu-shi-gou-zao-qi.html">Effective Java</a></p>
 ]]></content>
       <tags>
         <tag>Java</tag>
@@ -1193,6 +1225,37 @@
       </categories>
       <tags>
         <tag>zookeeper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ddia</title>
+    <url>/posts/54545d94/</url>
+    <content><![CDATA[<h1 id="一致性和共识"><a href="#一致性和共识" class="headerlink" title="一致性和共识"></a>一致性和共识</h1><p>主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？</p>
+<p>收敛：最终一致性的另一个名字。</p>
+<p>复制过程需要保证最终一致性，预计所有副本都会最终收敛到相同的值。</p>
+<p>本章主要探索数据系统的强一致性。强一致性要比弱一致性的系统具有更差的性能或者更少的容错性。</p>
+<p>事务隔离和分布式一致性模型解决问题的场景不一样</p>
+<p>事务隔离主要是为了避免同时执行事务导致的竞争状态。</p>
+<p>分布式一致性主要关于面对延迟和故障时如何协调副本之间的状态。</p>
+<h2 id="线性一致性"><a href="#线性一致性" class="headerlink" title="线性一致性"></a>线性一致性</h2><p>Zookeeper模仿Google Chubby锁服务，实现全序广播</p>
+]]></content>
+      <tags>
+        <tag>struct,system design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>租房经验</title>
+    <url>/posts/7f48cdf5/</url>
+    <content><![CDATA[<h2 id="租房注意事项"><a href="#租房注意事项" class="headerlink" title="租房注意事项"></a>租房注意事项</h2><p><img src="/posts/7f48cdf5/yuque_mind.jpeg" alt="img"></p>
+<h2 id="租房软件整理"><a href="#租房软件整理" class="headerlink" title="租房软件整理"></a>租房软件整理</h2><ul>
+<li><p>租房如果时间比较紧急，预算充足可以试试自如，比较方便，其他平台贝壳、链家、我爱我家这种我同事和亲戚也用过感觉还可以。</p>
+</li>
+<li><p>如果时间充足就可以加一些当地城市的租房群。暖房直租微信小程序，House2048微信小程序，闲鱼，豆瓣租房小组，租房搜索助手（<a href="http://uz.yurixu.com/manage/beijing.php%EF%BC%89%EF%BC%8C%E7%A7%9F%E6%88%BF%E5%9C%B0%E5%9B%BE%EF%BC%88https://house-map.cn/app/house-map/#/%EF%BC%89">http://uz.yurixu.com/manage/beijing.php），租房地图（https://house-map.cn/app/house-map/#/）</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>life</tag>
       </tags>
   </entry>
 </search>

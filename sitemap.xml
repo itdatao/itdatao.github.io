@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://itdatao.github.io/posts/7f48cdf5/</loc>
+    
+    <lastmod>2023-07-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/posts/54545d94/</loc>
+    
+    <lastmod>2023-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://itdatao.github.io/posts/21283aa4/</loc>
     
-    <lastmod>2023-03-29</lastmod>
+    <lastmod>2023-04-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -139,7 +157,7 @@
 
   <url>
     <loc>http://itdatao.github.io/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,49 +165,63 @@
   
   <url>
     <loc>http://itdatao.github.io/tags/MySQL/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/ES/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/Java/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/interview/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/spring/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/rocketMQ/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/tags/zookeeper/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/tags/struct-system-design/</loc>
+    <lastmod>2023-07-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://itdatao.github.io/tags/life/</loc>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -198,14 +230,14 @@
   
   <url>
     <loc>http://itdatao.github.io/categories/kafka/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://itdatao.github.io/categories/interview/</loc>
-    <lastmod>2023-04-01</lastmod>
+    <lastmod>2023-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

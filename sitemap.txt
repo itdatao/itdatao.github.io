@@ -1,3 +1,5 @@
+http://itdatao.github.io/posts/7f48cdf5/
+http://itdatao.github.io/posts/54545d94/
 http://itdatao.github.io/posts/21283aa4/
 http://itdatao.github.io/archives/index.html
 http://itdatao.github.io/tags/index.html
@@ -21,5 +23,7 @@ http://itdatao.github.io/tags/interview/
 http://itdatao.github.io/tags/spring/
 http://itdatao.github.io/tags/rocketMQ/
 http://itdatao.github.io/tags/zookeeper/
+http://itdatao.github.io/tags/struct-system-design/
+http://itdatao.github.io/tags/life/
 http://itdatao.github.io/categories/kafka/
 http://itdatao.github.io/categories/interview/
