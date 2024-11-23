@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"itdatao.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"border_radius":8,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一致性和共识主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？ 收敛：最终一致性的另一个名字。 复制过程需要保证最终一致性，预计所有副本都会最终收敛到相同的值。 本章主要探索数据系统的强一致性。强一致性要比弱一致性的系统具有更差的性能或者更少的容错性。 事务隔离和分布式一致性模型解决问题的场景不一样 事务隔离主要是为了避免同时执行事务导致的竞争状态。 分布式一致性主要">
+  <meta name="description" content="简单谈谈工作场景中的分布式系统的数据一致性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ddia">
+<meta property="og:title" content="分布式系统数据的一致性">
 <meta property="og:url" content="http://itdatao.github.io/posts/54545d94/index.html">
-<meta property="og:site_name" content="流沙的个人空间">
-<meta property="og:description" content="一致性和共识主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？ 收敛：最终一致性的另一个名字。 复制过程需要保证最终一致性，预计所有副本都会最终收敛到相同的值。 本章主要探索数据系统的强一致性。强一致性要比弱一致性的系统具有更差的性能或者更少的容错性。 事务隔离和分布式一致性模型解决问题的场景不一样 事务隔离主要是为了避免同时执行事务导致的竞争状态。 分布式一致性主要">
+<meta property="og:site_name" content="洛传的个人空间">
+<meta property="og:description" content="简单谈谈工作场景中的分布式系统的数据一致性">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-22T08:14:37.000Z">
-<meta property="article:modified_time" content="2023-07-15T12:01:07.096Z">
+<meta property="article:modified_time" content="2024-11-03T04:13:16.462Z">
 <meta property="article:author" content="H2T">
 <meta property="article:tag" content="struct,system design">
 <meta name="twitter:card" content="summary">
@@ -48,7 +48,7 @@
   };
 </script>
 <link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css">
-  <title>ddia | 流沙的个人空间</title>
+  <title>分布式系统数据的一致性 | 洛传的个人空间</title>
   
 
 
@@ -99,7 +99,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">流沙的个人空间</h1>
+      <h1 class="site-title">洛传的个人空间</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">this is an interesting blog</p>
@@ -201,11 +201,11 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="流沙的个人空间">
+      <meta itemprop="name" content="洛传的个人空间">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ddia
+          分布式系统数据的一致性
         </h1>
 
         <div class="post-meta">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-15 20:01:07" itemprop="dateModified" datetime="2023-07-15T20:01:07+08:00">2023-07-15</time>
+                <time title="修改时间：2024-11-03 12:13:16" itemprop="dateModified" datetime="2024-11-03T12:13:16+08:00">2024-11-03</time>
               </span>
 
           <br>
@@ -231,7 +231,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>252</span>
+              <span>555</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -250,16 +250,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <span id="more"></span>
+        <p>简单谈谈工作场景中的分布式系统的数据一致性</p>
+<span id="more"></span>
 
-<h1 id="一致性和共识"><a href="#一致性和共识" class="headerlink" title="一致性和共识"></a>一致性和共识</h1><p>主要探究分布式系统中，哪些情况可以容忍故障哪些又不能容忍，两者的限制是什么？</p>
-<p>收敛：最终一致性的另一个名字。</p>
-<p>复制过程需要保证最终一致性，预计所有副本都会最终收敛到相同的值。</p>
-<p>本章主要探索数据系统的强一致性。强一致性要比弱一致性的系统具有更差的性能或者更少的容错性。</p>
-<p>事务隔离和分布式一致性模型解决问题的场景不一样</p>
-<p>事务隔离主要是为了避免同时执行事务导致的竞争状态。</p>
-<p>分布式一致性主要关于面对延迟和故障时如何协调副本之间的状态。</p>
-<h2 id="线性一致性"><a href="#线性一致性" class="headerlink" title="线性一致性"></a>线性一致性</h2><p>Zookeeper模仿Google Chubby锁服务，实现全序广播</p>
+<h1 id="分布式系统数据的一致性"><a href="#分布式系统数据的一致性" class="headerlink" title="分布式系统数据的一致性"></a>分布式系统数据的一致性</h1><h2 id="什么是分布式系统的数据一致性"><a href="#什么是分布式系统的数据一致性" class="headerlink" title="什么是分布式系统的数据一致性"></a>什么是分布式系统的数据一致性</h2><p>分布式一致性问题主要是指：关于面对网络延迟和节点故障时如何协调副本之间的状态。</p>
+<ul>
+<li>强一致性：无论什么时候进行系统的写入操作，所有参与的副本都能在写入成功后，实时读取最新写入的值。强一致性通常会带来性能问题。</li>
+<li>弱一致性：分布式系统中，写入数据成功后的一段时间内，不会立即对所有副本进行更新。弱一致性可以提供更强的性能和更高的可用性，但是会出现数据不一致的情况。</li>
+<li>最终一致性：最终一致性可以在不同的时间段内保证数据的一致性。最终一致性提供了一种折中的解决方案，在性能和一致性之间取得平衡。</li>
+</ul>
+<h2 id="保证数据一致性的方案"><a href="#保证数据一致性的方案" class="headerlink" title="保证数据一致性的方案"></a>保证数据一致性的方案</h2><h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><h4 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h4><p>原理: 准备阶段和提交阶段.装备阶段协调者向参与者发送准备请求,参与者执行事务操作,但是并不提交;在提交阶段,如果所有的参与者都回复提交,协调者向所有参与者发送提交请求,否者发送回滚请求.<br>缺点:同步阻塞问题给,所i有参与者在两个阶段都是同步进行的;如果协调者发生故障,就会导致整个系统无法执行成功.</p>
+<h4 id="三阶段提交"><a href="#三阶段提交" class="headerlink" title="三阶段提交"></a>三阶段提交</h4><h4 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h4><h4 id="Raft协议"><a href="#Raft协议" class="headerlink" title="Raft协议"></a>Raft协议</h4><h4 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h4><h4 id="事务消息"><a href="#事务消息" class="headerlink" title="事务消息"></a>事务消息</h4><p>通过写操作后发送事务消息到消息队列,然后订阅端系统从消息队列中消费消息并进行对应的处理.<br>考虑的问题:<br>消息丢失:发送端进行消息重发<br>消息重复:消息订阅段幂等消费</p>
 
     </div>
 
@@ -290,7 +291,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://itdatao.github.io/posts/54545d94/" title="ddia">http://itdatao.github.io/posts/54545d94/</a>
+    <a href="http://itdatao.github.io/posts/54545d94/" title="分布式系统数据的一致性">http://itdatao.github.io/posts/54545d94/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -311,8 +312,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/ddaa8ce6/" rel="prev" title="netty">
-      <i class="fa fa-chevron-left"></i> netty
+    <a href="/posts/3e7adddd/" rel="prev" title="rocketmq">
+      <i class="fa fa-chevron-left"></i> rocketmq
     </a></div>
       <div class="post-nav-item">
     <a href="/posts/7f48cdf5/" rel="next" title="租房经验">
@@ -377,7 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%92%8C%E5%85%B1%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一致性和共识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">线性一致性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">分布式系统数据的一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">什么是分布式系统的数据一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">保证数据一致性的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">两阶段提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">三阶段提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Paxos%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Paxos协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Raft%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Raft协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCC"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">TCC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">事务消息</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -392,18 +393,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -438,7 +439,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
